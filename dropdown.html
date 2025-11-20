@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Dropdown Menu</title>
+    <style>
+        .container{
+            display: flex;
+            flex-direction: column;
+        }
+        .dropdown{
+            position: relative;
+            left: 100px;
+            border: 1px solid black;
+            width: 150px;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+        li{
+            list-style-type: none;
+        }
+        .list-option{
+            margin: 0px;
+            padding: 0px;
+            border: 1px solid black;
+            padding: 0px;
+            width: 170px;
+            margin-top: 10px;
+            border-radius: 10px;
+            position: absolute;
+            top: 50px;       
+            left: 108px;     
+        }
+        .dropdown-item{
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid #c4bebe;
+            /* width: 100%; */
+            padding: 10px;
+        }
+        .dropdown-img{
+            transition: .25s;
+        }
+        .active{
+            transform: rotate(180deg)
+        }
+        .generate-list{
+            display: none;
+            transition: 0.3s;
+        }
+
+        .dropdown-item:first-child {
+            border-top-left-radius: 10px; 
+            border-top-right-radius: 10px; 
+        }
+        .dropdown-item:last-child {
+            border-bottom: none;
+            border-bottom-left-radius: 10px; 
+            border-bottom-right-radius: 10px; 
+        }
+        .dropdown-item:hover{
+            background-color: #c4bebe;
+            transition: 0.2s;
+        }
+        .img-tick{
+            display: none;
+            width: 20px;
+            height: 20px;
+            margin-bottom: -5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="dropdown" id="dropdown">
+            <span class="dropdown-text  placeholder" id ="dropdown-text">
+                Select an Item
+            </span>
+            <span class="dropdown-img active" id ="dropdown-arrow" >▼</span>
+        </div>
+        <ul class="list-option generate-list">
+            <li class="dropdown-item" id="first-item" data-value="first-item">First Item
+                <img class="img-tick" src="ChatGPT Image 13_29_04 20 thg 11, 2025.png">
+            </li>
+            <li class="dropdown-item" id ="second-item"data-value="second-item">Second Item
+                <img class="img-tick" src="ChatGPT Image 13_29_04 20 thg 11, 2025.png">
+            </li>
+            <li class="dropdown-item" id ="third-item" data-value="third-item">Third Item
+                <img class="img-tick" src="ChatGPT Image 13_29_04 20 thg 11, 2025.png">
+            </li>
+            <li class="dropdown-item" id ="fourth-item" data-value="fourth-item">Fourth Item
+                <img class="img-tick" src="ChatGPT Image 13_29_04 20 thg 11, 2025.png">
+            </li>
+            <li class="dropdown-item" id ="fifth-item" data-value="fifth-item">Fifth Item
+                <img class="img-tick" src="ChatGPT Image 13_29_04 20 thg 11, 2025.png">
+            </li>
+        </ul>
+        <input type="hidden" id="hiddenInput" value="">
+    </div>
+    <script>
+        const arrow = document.getElementById("dropdown-arrow");
+        
+        document.querySelector(".container").addEventListener("click", (e) => {
+            const target = e.target;
+            console.log(target)
+            if (target.closest(".dropdown")){
+                GetArrow(target);
+                AppearItems();
+            }else if(target.closest(".dropdown-item")){
+                console.log(target.dataset.value);
+                const id =target.dataset.value;
+                const item = document.getElementById(id);
+                if (item.querySelector(".img-tick").style.display === "block"){
+                    item.querySelector(".img-tick").style.display = "none";
+                }else{
+                    document.querySelectorAll(".img-tick").forEach(i => {
+                        i.style.display = "none";
+                    })
+                    item.querySelector(".img-tick").style.display = "block";
+                    document.querySelector(".placeholder").textContent = id;
+                }
+            }
+        })
+        function AppearItems(){
+            if (document.querySelector(".generate-list").style.display === "block"){
+                document.querySelector(".generate-list").style.display = "none"
+            }else{
+                document.querySelector(".generate-list").style.display = "block"
+            }
+        }
+        function GetArrow(target){
+            const arrow = target.closest(".dropdown");
+            const arrowImg = arrow.querySelector(".dropdown-img");
+            arrowImg.classList.toggle("active");
+        }
+    </script>
+</body>
+</html>
