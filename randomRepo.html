@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Repository Finder</title>
+    <style>
+        /* ==========================================================
+           CSS: Cấu hình Giao diện và Trạng thái (Loading, Error)
+           ========================================================== */
+        body {
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .square-black {
+            margin-right: 10px;
+            width: 25px;
+            height: 25px;
+            background-color: black;
+            border-radius: 5px;
+        }
+        .dropdown {
+            position: relative;
+            border: 1px solid black;
+            width: 200px;
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+        }
+        .container-infor {
+            width: 200px;
+            min-height: 100px;
+            background-color: rgb(207, 201, 201);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .unactive {
+            display: none !important;
+        }
+        .list-item {
+            position: absolute;
+            width: 100%;
+            max-height: 50vh;
+            background-color: rgb(240, 240, 240);
+            border: 1px solid black;
+            top: 40px;
+            left: -1px;
+            overflow-y: auto;
+            border-radius: 10px;
+            z-index: 10;
+        }
+        .list-item .item {
+            padding: 10px;
+            cursor: pointer;
+            color: black;
+        }
+        .list-item .item:hover {
+            background-color: #ccc;
+        }
+        
+        /* Trạng thái UI */
+        .show {
+            background-color: white;
+            border: 1px solid #007bff;
+            display: block;
+            text-align: left;
+            padding: 10px;
+        }
+        .error {
+            background-color: #ff9999;
+            color: #cc0000;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .btn-refresh {
+            padding: 10px 70px;
+            border-radius: 10px;
+            border: none;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            display: block;
+        }
+        .loading-text {
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="square-black"></span>
+        <span class="name">GitHub Repository Finder</span>
+    </div>
+    
+    <div class="dropdown">
+        <span class="placeholder">Select a language</span>
+        <span class="arrow">▼</span>
+        <div class="list-item unactive">
+            <div class="item" style="text-align: center;">Đang tải ngôn ngữ...</div>
+        </div>
+    </div>
+    
+    <div class="container-infor">
+        Please select a language
+    </div>
+    
+    <button class="btn-refresh unactive">Refresh</button>
+    
+    <script type="module">
+        // ==========================================================
+        // KHAI BÁO VÀ CACHE DOM ELEMENTS
+        // ==========================================================
+        const listElement = document.querySelector(".list-item");
+        const placeholderElement = document.querySelector(".placeholder");
+        const infoContainer = document.querySelector(".container-infor");
+        const btnRefresh = document.querySelector(".btn-refresh");
+        
+        let languagesData = null; // Biến lưu trữ dữ liệu ngôn ngữ
+
+        // ==========================================================
+        // CÁC HÀM API CHUẨN
+        // ==========================================================
+
+        /** Lấy dữ liệu file JSON thô (languages.json) */
+        async function callAPI(stringValue){
+            const url = stringValue;
+            try {
+                const response = await fetch(url);
+                if (!response.ok){
+                    throw new Error(`Lỗi HTTP: ${response.status}`);
+                }
+                const value = await response.json();
+                return value;
+            } catch (error) {
+                console.error("Lỗi khi tải danh sách ngôn ngữ:", error.message);
+                return null;
+            }
+        }
+
+        /** Lấy dữ liệu Repo từ GitHub Search API */
+        async function GetDataFromGit(keyword) {
+            const BASE_URL = 'https://api.github.com/search/repositories';
+            const query = `q=${keyword}`; 
+            // Chỉ lấy 1 repo, sắp xếp theo sao giảm dần
+            const params = '&sort=stars&order=desc&per_page=1'; 
+            const apiUrl = `${BASE_URL}?${query}${params}`;
+            
+            const headers = {
+                'Accept': 'application/vnd.github.v3+json',
+                'X-GitHub-Api-Version': '2022-11-28',
+            };
+
+            try {
+                const response = await fetch(apiUrl, {headers: headers});
+                
+                if (!response.ok){
+                    const errorData = await response.json(); 
+                    // Ném lỗi chi tiết hơn từ phản hồi của GitHub
+                    throw new Error(`Lỗi API! Status: ${response.status}. Message: ${errorData.message}`);
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error("Đã xảy ra lỗi khi gọi API GitHub:", error.message);
+                return null; // Trả về null khi có lỗi
+            }
+        }
+
+        // ==========================================================
+        // CÁC HÀM XỬ LÝ UI
+        // ==========================================================
+
+        function turnDisplay(list){
+            list.classList.toggle("unactive");
+        }
+        
+        /** Dựng HTML cho danh sách ngôn ngữ (chỉ gọi 1 lần) */
+        function Gen(list, data){
+            let html = ``;
+                    console.log(languagesData)
+
+            for(let i of data){
+                // SỬA: dùng i.text (tên) và i.value (key)
+                html += 
+                `
+                    <div class="item" data-value="${i.value || ""}">
+                        ${i.title} 
+                    </div>
+                `
+            }
+            list.innerHTML = html;
+        }
+
+        /** Cập nhật UI khi gọi API xong */
+        function updateInfoContainer(data, language) {
+            btnRefresh.classList.remove("unactive"); // Luôn hiển thị nút refresh
+
+            if (data && data.items.length > 0) {
+                // THÀNH CÔNG VÀ CÓ KẾT QUẢ
+                const topRepo = data.items[0];
+                infoContainer.innerHTML = `
+                    <div style="font-weight: bold; margin-bottom: 5px; color: #007bff;">Repo hàng đầu cho ${language}:</div>
+                    <div style="margin-left: 10px; overflow: auto">
+                        Tên: <a href="${topRepo.html_url}" target="_blank" style="color: blue;">${topRepo.name}</a> <br>
+                        Sao: ${topRepo.stargazers_count.toLocaleString()} <br>
+                    </div>
+                `;
+                infoContainer.classList.add("show");
+                infoContainer.classList.remove("error");
+            } else if (data && data.items.length === 0) {
+                 // THÀNH CÔNG NHƯNG KHÔNG CÓ KẾT QUẢ
+                 infoContainer.innerHTML = `⚠️ Tìm kiếm thành công, nhưng không tìm thấy repo nào cho ${language}.`;
+                 infoContainer.classList.add("show");
+                 infoContainer.classList.remove("error");
+            } else {
+                // LỖI (data là null)
+                infoContainer.innerHTML = '❌ Đã xảy ra lỗi khi gọi API. Vui lòng thử Refresh.';
+                infoContainer.classList.add("error");
+                infoContainer.classList.remove("show");
+            }
+        }
+
+        // ==========================================================
+        // LOGIC KHỞI TẠO (TOP-LEVEL AWAIT)
+        // ==========================================================
+        languagesData = await callAPI("https://raw.githubusercontent.com/kamranahmedse/githunt/master/src/components/filters/language-filter/languages.json");
+        if (languagesData) {
+            Gen(listElement, languagesData);
+        } else {
+            listElement.innerHTML = `<div class="item error">Lỗi tải ngôn ngữ.</div>`;
+            infoContainer.innerHTML = `❌ Không thể tải danh sách ngôn ngữ để bắt đầu.`;
+            infoContainer.classList.add("error");
+        }
+
+
+        // ==========================================================
+        // XỬ LÝ SỰ KIỆN CHÍNH
+        // ==========================================================
+        document.querySelector("body").addEventListener("click", async (e) => {
+            const target = e.target;
+
+            // Xử lý click vào dropdown (Mở/Đóng)
+ // Xử lý click vào item (Chọn ngôn ngữ và gọi API)
+            if (target.closest(".item") && languagesData) {
+                            console.log(target);
+
+                const itemElement = target.closest(".item");
+                const languageValue = itemElement.dataset.value; 
+                
+                // 1. Cập nhật Placeholder và đóng dropdown
+                placeholderElement.textContent = languageValue;
+                listElement.classList.add("unactive"); 
+
+                // 2. Hiển thị Loading State
+                infoContainer.classList.remove("show", "error");
+                infoContainer.innerHTML = `
+                <span class="loading-text">🔍
+                     Đang tìm kiếm repo hàng đầu cho ${languageValue}...</span>`;
+
+                // 3. Gọi API
+                const data = await GetDataFromGit(languageValue);
+                
+                // 4. Cập nhật kết quả cuối cùng
+                updateInfoContainer(data, languageValue);
+
+            } 
+            else if (target.closest(".dropdown")) {
+                turnDisplay(listElement);
+            } 
+           
+            // Xử lý click ra ngoài
+            else {
+                // Đóng dropdown nếu nó đang mở
+                if (!listElement.classList.contains("unactive")) {
+                    listElement.classList.add("unactive");
+                }
+            }
+        });
+
+        // Xử lý sự kiện Refresh 
+        btnRefresh.addEventListener("click", () => {
+            placeholderElement.textContent = "Select a language";
+            infoContainer.innerHTML = "Please select a language";
+            infoContainer.classList.remove("show", "error");
+            btnRefresh.classList.add("unactive"); 
+        });
+    </script>
+</body>
+</html>
