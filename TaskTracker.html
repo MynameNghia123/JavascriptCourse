@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        .add-task{
+            position: relative;
+            width: 300px;
+
+        }
+        .input-task{
+            padding: 10px 13px;
+            width: 300px;
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+        .btn-submit{
+            position: absolute;
+            top: 3px;
+            right: -26px;
+            background-color: black;
+            border-radius: 10px;
+            padding: 2px 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .material-icons{
+            color: white;
+        }
+        .list-tasks{
+            margin-top: 20px;
+            width: 320px;
+            border-radius: 10px;
+            border: 1px solid black;
+            text-align: center;
+        }
+        .task{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        hr{
+            width: 100%;
+        }
+        .infor{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .error{
+            top: 0;
+            display: none;
+            color: red;
+            padding: 0px 30px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Task Tracker</h2>
+    <div class="add-task">
+        <input type="text" class="input-task" id="input-task" placeholder="Start writing and press enter to create task">
+        <button class="btn-submit">
+            <span class="material-icons">keyboard_return</span>
+        </button>
+    </div>
+    <p class="error">*Không được để ô trống</p>
+    <div class="list-tasks">
+        <p class="text">Hãy thêm task cho ngày hôm nay nào</p>
+    </div>
+    
+    <script type="module">
+        let amountTask = 0;
+        const input = document.getElementById("input-task");
+        const listTask = document.querySelector(".list-tasks");
+        const submit = document.querySelector(".btn-submit");
+        const error = document.querySelector(".error");
+
+        SubmitTask();
+
+        function SubmitTask(){
+            input.addEventListener("keydown", (event) =>{
+                if (event.key === "Enter"){
+                    GetInput()
+                }
+            })
+            submit.addEventListener("click", () => {
+                GetInput();
+            })
+
+        }
+        function GetInput(){
+            const data = input.value.trim();
+
+            console.log(data);
+            if (data !== ""){
+                error.style.display = "none";
+                const task = input.value;
+                GenNewTask(task);
+                input.value = "";
+                document.querySelector(".text").style.display="none";
+            }else{
+                error.style.display = "block";
+            }
+        }
+        function GenNewTask(stringTask){
+            const html = 
+            `
+                <div class=contain-task>
+                    <div class="task">
+                        <div class="infor">
+                            <input type="checkbox" id="task${amountTask}" name="task${amountTask}" value="task${amountTask}">
+                            <label for="task${amountTask++}">${stringTask}</label>
+                        </div>
+                        <span>🗑️</span>
+                    </div>
+                ${amountTask-1 !== 0 ? "<hr>" : ""}
+                </div>
+            `;
+            listTask.insertAdjacentHTML("afterbegin", html)
+            AddEventRemoveTask("task" + (amountTask - 1));
+            AddEventCompletedTask("task" + (amountTask - 1));
+        }
+        function AddEventCompletedTask(key){
+            const checkbox = document.getElementById(key);
+            console.log(checkbox);
+            checkbox.addEventListener("change", ()=>{
+                console.log("change")
+                const label = checkbox.nextElementSibling;  
+                label.innerHTML = `<del>${label.textContent}</del>`;
+                checkbox.disabled = true;
+            })
+        }
+        function AddEventRemoveTask(key){
+            const garbage = document.getElementById(key);
+            // console.log(garbage);
+            const containTask = garbage.closest(".contain-task");
+            // console.log(containTask);
+            containTask.querySelector("span").addEventListener("click", ()=>{
+                containTask.style.display = "none";
+            })
+
+
+        }
+    </script>
+
+</body>
+</html>
