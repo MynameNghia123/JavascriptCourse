@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Document</title>
+    <style>
+
+        body {
+            display: flex; /* Bật chế độ Flexbox */
+            justify-content: center; /* Căn giữa theo chiều ngang */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            background-image: linear-gradient( #9933FF, #FF66CC);
+            min-height: 100vh;            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            width: 500px;
+            border-radius: 23px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+                        font-size: 18px;
+
+        }
+        .container--infor{
+            background-color: rgb(236, 208, 208);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 400px;
+            border-radius: 10px;
+            gap: 10px;
+            padding: 20px 10px;
+            margin: 10px;
+        }
+        .container--infor__detail{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .start{
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #b700ff;
+            border-radius: 120px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .header, .right--header, .right--header__Time{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .header{
+            margin: 10px;
+        }
+         .container .header{
+            width: 90%;
+            justify-content: space-between;
+        }
+        .right--header__Time{
+            gap: 5px;
+            margin-left: 20px;
+            background-color: rgb(151, 151, 255);
+            height: 40px;
+            width: 80px;
+            display: flex;
+            justify-content: center;
+            border-radius: 40px;
+        }
+        .progress-container{
+            width: 80%;
+            height: 10px;
+            background-color: #dedede;
+            border-radius: 20px;
+        }
+        .progress-bar{
+            background-color: #b700ff;
+            height: 10px;
+            border-radius: 20px;
+        }
+        .form{
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            background-color: antiquewhite;
+        }
+        .form--answers{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .answer{
+            text-align: start;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: rgb(78, 78, 255);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .form--question{
+            font-size: 25px;
+            font-weight: bold;
+        }
+        .true{
+            background-color: rgb(60, 247, 60);
+        }
+        .false{
+            background-color: red;
+        }
+        .noanswer{
+            background-color: #929191;
+        }
+        .review-answer{
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 80%;
+            border: 1px solid black;
+            gap: 10px;
+            margin: 10px;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+        p{
+            margin: 0px;
+        }
+        .close-icon{
+            color: red;
+            margin-top: 3px;
+        }
+        .success-icon{
+            color: rgb(78, 232, 78);
+            margin-top: 3px;
+
+        }
+        .correct-answer{
+            color: rgb(132, 6, 170);
+            font-size: 50px;
+            font-weight: bold;
+        }
+        .sucess{
+            border: 1px solid green;
+            background-color: rgb(167, 244, 167);
+        }
+        .failure{
+            border: 1px solid red;
+            background-color: rgb(253, 167, 167);
+        }
+        .btn-refresh{
+            color: white;
+            background-color: #9933FF;
+            padding: 10px 20px;
+            border-radius: 100px;
+            border: none;
+            margin: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .disable-click {
+            pointer-events: none; /* Ngăn chặn tất cả các sự kiện chuột */
+            cursor: default; /* Đổi con trỏ chuột thành mặc định */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <h1>Quiz Master</h1>
+        <p>Test Your knowledge with our exciting quiz!</p>
+        <div class="container--infor">
+            <div class="container--infor__detail">
+                <i class="fa-solid fa-file-lines info-icon icon"></i>
+                <p>8 questions</p>
+            </div>
+            <div class="container--infor__detail">
+                <i class="fa-regular fa-clock info-icon icon"></i>
+                <p>60 seconds per question</p>
+            </div>
+            <div class="container--infor__detail">
+                <i class="fa-solid fa-triangle-exclamation info-icon warning icon"></i>
+                <p>Time out = -1 point</p>
+            </div>
+            <div class="container--infor__detail">
+                <i class="fa-solid fa-circle-check info-icon success icon"></i>
+                <p>correct answer = +1 point</p>
+            </div> 
+        </div>
+        <button class="start">Start Quiz</button>
+        -->
+    </div>
+    <script type="module">
+        // Page
+        const resultPage = `
+        <img src="Capture.PNG" alt="">
+        <h2>Quiz Completed!</h2>
+        <p class="correct-answer">0/8</p>
+        <p class="percentage">25%</p>
+        <h2 style="margin-left: -150px;">Review Your Answers</h2>
+ 
+
+
+        `;
+        const formPage = `
+        <div class="header">
+            <div class="left--header">Question 1 to 8</div>
+            <div class="right--header">
+                <p class="right--header__score">Score: 0</p>
+                <div class="right--header__Time">
+                    <i class="fa-regular fa-clock info-icon icon"></i>
+                    <p>60</p>
+                </div>
+            </div>
+        </div>
+        <div class="progress-container">
+
+            <div class="progress-bar" style="width: 85%;">
+            </div>
+        </div>
+        <div class="form">
+            <p class="form--question">AAAAA</p>
+            <div class="form--answers">
+                <button class="answer true" id="answer-1">a</button>
+                <button class="answer false" id="answer-2">b</button>
+                <button class="answer noanswer" id="answer-3">c</button>
+                <button class="answer" id="answer-4">d</button>
+            </div>
+        </div>
+        `;
+        const startPage = `        <img src="Capture.PNG" alt="">
+        <h1>Quiz Master</h1>
+        <p>Test Your knowledge with our exciting quiz!</p>
+        <div class="container--infor">
+            <div class="container--infor__detail">
+                <i class="fa-solid fa-file-lines info-icon icon"></i>
+                <p>8 questions</p>
+            </div>
+            <div class="container--infor__detail">
+                <i class="fa-regular fa-clock info-icon icon"></i>
+                <p>60 seconds per question</p>
+            </div>
+
+            <div class="container--infor__detail">
+                <i class="fa-solid fa-circle-check info-icon success icon"></i>
+                <p>correct answer = +1 point</p>
+            </div>
+        </div>
+        <button class="start">Start Quiz</button>`
+        // variable
+        let totalSeconds = 60; // Chỉ cần 60 giây
+        const INITIAL_SECONDS = 60;
+        let countdownInterval = null;
+        let currentQuestion = 0;
+        let myChoose = [];
+        let score = 0;
+        const quizQuestions = [
+        {
+            question: "1. Ngôn ngữ nào chịu trách nhiệm tạo ra cấu trúc và nội dung của trang web?",
+            options: [
+                "A. CSS",
+                "B. HTML",
+                "C. JavaScript",
+                "D. SQL"
+            ],
+            correctAnswerIndex: 1
+        },
+        {
+            question: "2. Thuộc tính CSS nào được sử dụng để căn chỉnh văn bản ở giữa (center) một phần tử?",
+            options: [
+                "A. align-items",
+                "B. margin: auto",
+                "C. text-align: center",
+                "D. justify-content"
+            ],
+            correctAnswerIndex: 2
+        },
+        {
+            question: "3. Trong JavaScript, hàm nào được sử dụng để in dữ liệu ra bảng điều khiển (console)?",
+            options: [
+                "A. print()",
+                "B. console.write()",
+                "C. log.console()",
+                "D. console.log()"
+            ],
+            correctAnswerIndex: 3
+        },
+        {
+            question: "4. Tag HTML nào được sử dụng để tạo một danh sách không có thứ tự (unordered list)?",
+            options: [
+                "A. &ltol&gt",
+                "B. &ltli&gt",
+                "C. &ltul&gt",
+                "D. &ltdl&gt"
+            ],
+            correctAnswerIndex: 2
+        },
+        {
+            question: "5. Khung nhìn (viewport) của trình duyệt web được xác định bởi thẻ HTML nào?",
+            options: [
+                "A. &ltmeta name=\"viewport\" ...&gt",
+                "B. &ltbrowser-view>",
+                "C. &lthtml>",
+                "D. &ltbody>"
+            ],
+            correctAnswerIndex: 0
+        },
+        {
+            question: "6. Ký tự nào được sử dụng để chỉ định một class trong CSS?",
+            options: [
+                "A. # (dấu thăng)",
+                "B. . (dấu chấm)",
+                "C. * (dấu sao)",
+                "D. & (dấu và)"
+            ],
+            correctAnswerIndex: 1
+        },
+        {
+            question: "7. Trong JavaScript, đâu là một kiểu dữ liệu (data type) nguyên thủy?",
+            options: [
+                "A. Object",
+                "B. Array",
+                "C. Function",
+                "D. Boolean"
+            ],
+            correctAnswerIndex: 3
+        },
+        {
+            question: "8. Phương pháp nào thường được sử dụng để thiết kế trang web hiển thị tốt trên mọi kích thước màn hình?",
+            options: [
+                "A. Fixed Design",
+                "B. Responsive Web Design",
+                "C. Absolute Design",
+                "D. Static Design"
+            ],
+            correctAnswerIndex: 1
+        }
+    ];
+        const container = document.querySelector(".container");
+        init();
+
+
+        function initForm(form){
+            console.log(form);
+            document.querySelector(".left--header").textContent = `Question ${currentQuestion + 1} to 8`;
+            document.querySelector(".right--header__score").textContent = `Score : ${score}`;
+            if (currentQuestion === 8) {
+                LoadResultPage(myChoose);
+                return;
+            }
+            form.innerHTML = 
+            `
+                <p class="form--question">${quizQuestions[currentQuestion].question}</p>
+                <div class="form--answers">
+                    ${quizQuestions[currentQuestion].options.map((optionText, index) => {
+                        return `<button class="answer" data-index =${index}>${optionText.toString()}</button>`
+                    }).join('')}
+                </div>
+            `;
+            if (currentQuestion === 0) AddEventClickAnswer(form, quizQuestions[currentQuestion].correctAnswerIndex);
+            displayTimer(form, quizQuestions[currentQuestion].correctAnswerIndex || 1);
+            console.log("current ques: " + currentQuestion)
+            currentQuestion++;
+            
+        }
+        function AddEventClickAnswer(form, correctAnswerIndex){
+            form.addEventListener("click", (e)=> {
+                const target = e.target;
+                if (form === target){
+                    console.log(target);
+                    return;
+                }else if(target.closest(".answer")){
+                    clearInterval(countdownInterval);
+                    CheckAnswer(target, correctAnswerIndex);
+                    if (currentQuestion === 8 && myChoose.length === 8){
+                        console.log(myChoose)
+                        LoadResultPage(myChoose)
+
+                    }else{
+                        setTimeout(initForm, 1000, form)
+                    }
+                }
+            })
+        }
+        function LoadResultPage(myChoose){
+            container.innerHTML = resultPage;
+            console.log(quizQuestions);
+            let html = quizQuestions.map((obj, index) => {
+
+                if (myChoose[index] == 5){
+                    return `
+                    <div class="review-answer sucess" style ="background-color: gray;">
+                        <i class="fa-solid fa-circle-check success-icon"></i>   
+                        <div class="review-infor">
+                            <p class="review-infor__question">Q1: ${obj.question}</p>
+                            <p class="review-infor__myanswer">Answer: ${obj.options[obj.correctAnswerIndex]}</p>
+                        </div>
+                    </div>  
+                    `
+                }
+                if (obj.correctAnswerIndex == myChoose[index]){
+                    return `
+                    <div class="review-answer sucess">
+                        <i class="fa-solid fa-circle-check success-icon"></i>   
+                        <div class="review-infor">
+                            <p class="review-infor__question">Q1: ${obj.question}</p>
+                            <p class="review-infor__myanswer">your Answer: ${obj.options[myChoose[index]]}</p>
+                        </div>
+                    </div>  
+                    `
+                }else {
+                    return `
+                        <div class="review-answer failure">
+                            <i class="fa-solid fa-circle-xmark close-icon"></i>  
+                            <div class="review-infor">
+                                <p class="review-infor__question">Q1: ${obj.question}</p>
+                                <p class="review-infor__myanswer">your Answer:  ${obj.options[myChoose[index]]}</p>
+                                <p class="review-infor__answer">Answer:  ${obj.options[obj.correctAnswerIndex]}</p>
+                            </div>
+                        </div> 
+                    `
+                }
+            }).join("");
+            container.insertAdjacentHTML("beforeend", html);
+            container.innerHTML += `<button class="btn btn-refresh">Try Again</button> `
+            document.querySelector(".btn-refresh").addEventListener("click", ()=>{
+                currentQuestion = 0;
+                container.innerHTML = formPage;
+                const form = document.querySelector(".form");
+                myChoose = [];
+                score = 0;
+                initForm(form);
+            })
+            let  k = score/10;
+            document.querySelector(".correct-answer").textContent =`${k}/8`
+            document.querySelector(".percentage").textContent =`${100 * k/8}%`
+
+        }
+        function init(){
+            container.innerHTML = startPage;
+
+            const startBtn = document.querySelector(".start");
+            startBtn.addEventListener("click", () =>{
+                container.innerHTML = formPage;
+                const form = document.querySelector(".form");
+                initForm(form);
+            })
+        }
+        function CheckAnswer(target, correctAnswerIndex){
+            let indexAnswer = target.dataset.index;
+            myChoose.push(indexAnswer);
+            console.log("dap an dang chon: " +indexAnswer);
+            console.log("Dap an dung: " + correctAnswerIndex);
+            if (correctAnswerIndex == indexAnswer){
+                score += 10;
+                target.classList.add("true");
+                target.classList.add("disable-click");
+            }else {
+                target.classList.add("false");
+                target.classList.add("disable-click");
+            }
+            document.querySelectorAll(".answer").forEach((ans) => {
+                if (ans.dataset.index == correctAnswerIndex){
+                    ans.classList.add("true");
+                    ans.classList.add("disable-click");
+                }
+                else if (ans.dataset.index != indexAnswer){
+                    ans.classList.add("noanswer");
+                    ans.classList.add("disable-click");
+                }
+            })
+
+        }
+
+        function displayTimer(form, correctAnswerIndex){
+            totalSeconds = 5;
+            const displayTime = document.querySelector(".right--header__Time p");
+            console.log(displayTime)
+            countdownInterval = setInterval(() => {
+            if (totalSeconds === 0) {
+                // Dừng khi hết giờ
+                myChoose.push(5);
+                displayTime.textContent = "0";
+
+                document.querySelectorAll(".answer").forEach((ans) => {
+                if (ans.dataset.index == correctAnswerIndex){
+                    ans.classList.add("true");
+                    ans.classList.add("disable-click");
+                }
+                else{
+                    ans.classList.add("noanswer");
+                    ans.classList.add("disable-click");
+                }
+            })
+            }
+            if (totalSeconds > 0){
+                displayTime.textContent = totalSeconds;
+            }
+            console.log(totalSeconds);
+            if (totalSeconds == -2){
+                clearInterval(countdownInterval);
+                initForm(form)
+            }
+            totalSeconds--;
+            // Cập nhật hiển thị số giây
+            }, 1000); // 1000ms = 1 giây
+
+        }
+ </script>
+</body>
+</html>
