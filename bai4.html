@@ -1,0 +1,156 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="frmDangnhap">
+        <h2>ĐĂNG KÝ TÀI KHOẢN</h2>
+        <div class="form-group">
+            <label for="txtTendangnhap">Tên đăng nhập</label>
+            <input type="text" name="txtTendangnhap" id="tendangnhap">
+        </div>
+        <div class="form-group">
+            <label for="txtMatkhau">Mật khẩu</label>
+            <input type="text" name="txtMatkhau" id="matkhau">
+        </div>
+        <div class="form-group">
+            <label for="txtXacnhanmatkhau">Xác nhận mật khẩu</label>
+            <input type="text" name="txtXacnhanmatkhau" id="xacnhanmatkhau">
+        </div>
+        <div class="form-group">
+            <label for="txtDienthoat">Số điện thoại</label>
+            <input type="tel" name="txtDienthoat" id="sodienthoai">
+        </div>
+        <div class="form-group">
+            <label for="txtDiachi">Địa chỉ</label>
+            <input type="text" name="txtDiachi" id="diachi">
+        </div>
+        <button name="btnTaotaikhoan">TẠO TÀI KHOẢN</button>
+    </form>
+</body>
+<script>
+    const user = document.querySelector('[name="txtTendangnhap"]');
+    const pass = document.querySelector('[name="txtMatkhau"]');
+    const passVertycation = document.querySelector('[name="txtMatkhau"]');
+    const phone = document.querySelector('[name="txtDienthoat"]');
+    console.log(document.querySelector('[name="btnTaotaikhoan"]'));
+    document.querySelector('[name="frmDangnhap"]').addEventListener("submit", (e)=>{
+        if(user.value.trim() === ""){
+            alert("tài khoản không được để trống")
+            e.preventDefault();
+            user.focus();
+            return;
+        }
+        const chuoi = user.value;
+        console.log(chuoi.length)
+        if (chuoi.length !== 8){
+                alert("tài khoản phải có ít nhất 8 ký tự")
+                e.preventDefault();
+                user.focus();
+                return;
+        }
+        for(let i = 0; i < chuoi.length; i++){
+
+            if ( (i === 0 && chuoi[i] !== "S") || (i === 1 && chuoi[i] !== "V")){
+                alert("tài khoản sai định dạng đăng nhập")
+                e.preventDefault();
+                user.focus();
+                return;
+            }
+
+
+            if (i > 2 && isNaN(chuoi[i])){
+               alert("tài khoản sai định dạng đăng nhập")
+                e.preventDefault();
+                user.focus();
+                return;
+            }
+        }
+
+        if (pass.value.length < 6){
+            alert("Mật khẩu tối thiểu 6 ký tự")
+            e.preventDefault();
+            pass.focus();
+            return;
+        }
+
+        if (pass.value !== passVertycation.value){
+            alert("Mật khẩu và mật khẩu xác nhận phải trùng nhau")
+            e.preventDefault();
+            passVertycation.focus();
+            return;
+        }
+        if (phone.value.trim() === ""){
+            alert("Số điện thoại ko được rỗng")
+            e.preventDefault();
+            phone.focus();
+            return;
+        }
+        console.log(phone.value[0])
+        if (phone.value.length !== 10 || (phone.value[0]) !== 0){
+            alert("Số điện thoại phải là 10 số và số đầu tiền là số 0")
+            e.preventDefault();
+            phone.focus();
+            return;
+        }
+        e.preventDefault();
+
+        alert("dang nhap thanh cong")
+    })
+</script>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="form1">
+        <select name="cbosothich" id="sothich">
+            <option value="1">Chọn sở thích</option>
+            <option value="2" selected>Thể thao</option>
+            <option value="3" >võ thuật</option>
+        </select>
+        <div id="hienthithongtin">
+            <input type="checkbox" name="chk1" id="chk1">
+            <label for="chk1">bóng bàn</label>
+            <input type="checkbox" name="chk2" id="chk2">
+            <label for="chk2">cầu lông</label>
+            <input type="checkbox" name="chk3" id="chk3">
+            <label for="chk3">bóng đá</label>
+        </div>
+    </form>
+</body>
+<script>
+        const thethao = ["bóng bàn", "cầu lông", "bóng đá"];
+        const vothuat = ["Karate", "Judo", "Taekwondo"];
+
+        const sothich = document.getElementById("sothich");
+        const hienthi = document.getElementById("hienthithongtin");
+
+        sothich.addEventListener("change", (e)=>{
+            if (e.target.value == "1"){
+                hienthi.style.display = "none";
+            }else{
+                hienthi.style.display = "block";
+
+                hienthi.querySelectorAll("label").forEach((i, index)=>{
+                    console.log(i);
+                    if (e.target.value === "2"){
+                        i.innerText = thethao[index];
+                    }else{  
+                        i.innerText =vothuat[index];
+                    }
+                })
+
+            }
+        })
+</script>
+</html>

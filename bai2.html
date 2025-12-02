@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            border: 1px solid #000;
+            width: 500px;
+            padding: 20px;
+            margin: 0 auto;
+            background-color: #f0f0f0;
+        }
+        h2 { text-align: center; }
+        .form-group { margin-bottom: 10px; }
+        label { display: inline-block; width: 150px; }
+    </style>
+</head>
+<body>
+    <form name="frmPhieudatphong" id ="form">
+        <h2>PHIẾU ĐẶT PHÒNG</h2>
+        <div class="form-group">
+            <label for="txtHoten">Họ tên*</label>
+            <input type="text" name="txtHoten" id="hoten">
+        </div>
+        <div class="form-group">
+            <label for="txtDiachi">Địa chỉ</label>
+            <input type="text" name="txtDiachi" id="diachi">
+        </div>
+        <div class="form-group">
+            <label for="txtcmnd">CMND*</label>
+            <input type="number" name="txtcmnd" id="cmnd">
+        </div>
+        <div class="form-group">
+            <label for="cboMucGia">Mức Giá</label>
+            <select name="cboMucGia" id="mucgia">
+                <option value="a" selected>loại thường</option>
+                <option value="b">loại sang trọng</option>
+                <option value="c">loại đặc biệt</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="dateNgayThue">Ngày Thuê</label>
+            <input type="date" name="dateNgayThue" id="ngaythue">
+        </div>
+        <div class="form-group"></div>
+            <label for="dateNgayThue">Ngày Trả</label>
+            <input type="date" name="dateNgaytra" id="ngaytra">
+        </div>
+
+        <div class="form-group">
+            <label for="chkAnsang">Dịch vụ đi kèm</label>
+            <input type="checkbox" name="chkAnsang" id="ansang">Ăn Sáng
+            <input type="checkbox" name="chkGiatui" id="giatui">Giặt ủi
+            <input type="checkbox" name="chkBaobuoisang" id="baobuoisang">Báo Buổi sáng
+        </div>
+        <div class="form-group">
+            <label for="txtTienthuephong">Tiền Thuê Phòng</label>
+            <input type="text" name="txtTienthuephong" id="tienthuephong" readonly>VND
+        </div>
+        
+        <div class="form-group">
+            <button type="button" name="btnTinhdongia" id="dongia"> Tìm Đơn Giá</button>
+            <button type="submit" name="subDangky" id="submit"> Đăng ký</button>
+        </div>
+    </form>
+    <script>
+        console.log(document.getElementsByName("frmPhieudatphong")[0]);
+        const form = document.getElementById("form");
+        const btnDonGia = document.getElementById("dongia");
+        const btnDangky = document.getElementById("submit");
+        const inpHoten = document.getElementById("hoten");
+        const inpCMND = document.getElementById("cmnd");
+        const mucgia = document.getElementById("mucgia");
+        form.addEventListener("submit", ()=>{
+            if (inpHoten.value.trim() === ""){
+                alert("Họ tên không được rỗng")
+                inpHoten.focus();
+                event.preventDefault(); 
+                return;
+            }
+
+            if (inpCMND.value.trim() === ""){
+                alert("CMND không được để rổng")
+                inpCMND.focus();
+                event.preventDefault();
+                return;
+            }
+
+            if (isNaN(inpCMND.value)){
+                alert("CMND không được là chữ")
+                inpCMND.focus();
+                event.preventDefault();
+                return;
+            }
+
+            alert("submit thành công");
+        })
+        
+        console.log(mucgia)
+        mucgia.addEventListener("change", (event)=>{
+            const dulieu = event.target.value;
+                    console.log(dulieu)
+
+            const ansang = document.getElementById("ansang");
+            if (dulieu === "b" || dulieu === "c"){
+                ansang.checked = true;
+            }else{
+                ansang.checked = false;
+            }
+        })
+
+        const ngaythue = document.getElementById("ngaythue");
+        const ngaytra = document.getElementById("ngaytra");
+        const btnFind = document.getElementById("dongia");
+
+        btnFind.addEventListener("click", (event)=> {
+            let ngaythueTime = new Date(ngaythue.value);
+            let ngaytraTime = new Date(ngaytra.value);
+            let songay
+            console.log(ngaythueTime);
+            console.log(ngaythue);
+            console.log(ngaytraTime);
+            console.log(ngaytra);
+            if (ngaythue.value > ngaytra.value){
+                alert("sai cmnrasmd")
+            }
+            if (ngaythue.value.trim() === "" && ngaytra.value.trim() === ""){
+                songay = 1;
+            }
+            else if (ngaythue.value === ngaytra.value){
+                songay = 1;
+            }
+            console.log(ngaytraTime.getTime() - ngaythueTime.getTime())
+            if (ngaythue.value != "" && ngaytra != ""){
+                let sogiay = Math.abs(ngaytraTime.getTime() - ngaythueTime.getTime());
+                songay = sogiay / (1000 * 24 * 60 * 60);
+
+            }
+            console.log("songay: " + songay);
+
+        })
+    </script>
+</body>
+</html>

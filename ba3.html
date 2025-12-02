@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <h1>ĐẢO NGƯỢC SỐ NGUYÊN DƯƠNG</h1>
+        <input type="text" name="1" id="nhap" placeholder="Nhập số nguyên dương">
+        <input type="text" name="2" id="xuat" value="Số đảo ngược sẽ hiển thị ở đây" disabled>
+        <button >In số đảo ngược</button>
+    <script>
+        const nhap = document.getElementById("nhap");
+        const xuat = document.getElementById("xuat");
+        const btn = document.querySelector("button");
+
+        btn.addEventListener("click", (e)=>{
+            const songuyenduong = nhap.value;
+            
+            if (songuyenduong.trim() === ""){
+                alert("nhập 1 số nguyên dương");
+                nhap.focus();
+                e.preventDefault();
+            }
+
+            if (isNaN(songuyenduong)){
+                alert("Yeu cau phai nhap so nguyen duong");
+                nhap.focus();
+                e.preventDefault();
+            }
+
+            xuat.value = ChuyenDoiSonguyenDuong(songuyenduong);
+        })
+        function ChuyenDoiSonguyenDuong(n){
+            let result = 0;
+            // if (n < 10) return n;
+            while (n > 0){
+                result = result * 10 + (n % 10);
+                n = Math.floor(n / 10);
+                console.log(result);
+            }
+            return result;
+        }
+    </script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #noidung{
+            display: flex;
+            border: 3px solid black;
+        }
+        img{
+            border: 10px solid blue;
+            border-radius: 100%;
+
+        }
+        .sanpham{
+            padding: 10px;
+            border: 2px solid black;
+            margin: 10px;
+        }
+
+        .sanpham div{
+            border-bottom: 3px solid black;
+            margin-top: 5px;
+        }
+        span{
+            border: 2px solid black;
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div id="noidung">
+        <div class="sanpham">
+            <img src="Capture.PNG" alt="">
+
+            <div>Mã SP: 001</div>
+            <div>Tên SP: giầy số 1</div>
+            <div>Giá SP: 300000</div>
+            <div>
+                <span>Mua</span>
+                <span>ChiTiet</span>
+            </div>
+        </div>
+        <div class="sanpham">
+            <img src="Capture.PNG" alt="">
+
+            <div>Mã SP: 001</div>
+            <div>Tên SP: giầy số 1</div>
+            <div>Giá SP: 300000</div>
+            <div>
+                <span>Mua</span>
+                <span>ChiTiet</span>
+            </div>
+        </div>
+        <div class="sanpham">
+            <img src="Capture.PNG" alt="">
+
+            <div>Mã SP: 001</div>
+            <div>Tên SP: giầy số 1</div>
+            <div>Giá SP: 300000</div>
+            <div>
+                <span>Mua</span>
+                <span>ChiTiet</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html> -->
+

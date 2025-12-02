@@ -1,37 +1,152 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Master Card</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Đăng ký điện hoa</title>
+    <style type="text/css">
+        /* CSS từ Đề bài */
+        label {
+            display: block;
+            padding-top: 0.2em;
+            padding-bottom: 0.2em;
+        }
+        
+        div.fl {
+            float: left;
+            margin-right: 0.6em;
+        }
+
+        select.hoa {
+            width: 8em;
+        }
+
+        select.date {
+            width: 4em;
+        }
+
+        input[type="text"] {
+            width: 5em;
+        }
+
+        div#mainForm {
+            /* Trong đề ghi là border: 1; nhưng cú pháp đúng phải là border: 1px solid ... */
+            border: 1px solid black; 
+
+        }
+
+        div#submit {
+            padding-top: 0.2em;
+            clear: both; /* Quan trọng: Ngắt dòng sau khi float */
+            margin-top: 10px;
+        }
+
+        div.sep {
+            float: left;
+            margin-left: 0.0em;
+            margin-right: 0.6em;
+            padding-top: 1.8em; 
+        }
+
+        div.simple {
+            float: left;
+            padding-top: 0.5em;
+        }
+
+        fieldset {
+            width: 17em;
+            margin-bottom: 0.2em;
+        }
+    </style>
 </head>
 <body>
-    <div class="quiz-card">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/5219729563711197656_0" alt="Quiz Medal Icon" class="medal-icon">
-        
-        <h1 class="title">Quiz Master</h1>
-        <p class="subtitle">Test your knowledge with our exciting quiz!</p>
+    <form>
+        <div id="mainForm">
+            <div>
+                <fieldset>
+                    <legend>Thông tin mua hoa</legend>
+                    <div>
+                        <label for="from">Loại hoa:</label>
+                        <select name="Flower" class="hoa">
+                            <option value="-1">Chọn hoa</option>
+                            <option value="Rose">Hoa hồng</option>
+                            <option value="Daisy">Hoa cúc</option>
+                            <option value="Tup" selected>Hoa Tulip</option>
+                            <option value="Lyly">Hoa Ly ly</option>
+                        </select>
+                    </div>
 
-        <div class="info-box">
-            <div class="info-item">
-                <i class="fa-solid fa-file-lines info-icon"></i>
-                <span>8 questions</span>
-            </div>
-            <div class="info-item">
-                <i class="fa-regular fa-clock info-icon"></i>
-                <span>60 seconds per question</span>
-            </div>
-            <div class="info-item penalty">
-                <i class="fa-solid fa-triangle-exclamation info-icon warning"></i>
-                <span>Time out = -1 point</span>
-            </div>
-            <div class="info-item reward">
-                <i class="fa-solid fa-circle-check info-icon success"></i>
-                <span>Correct answer = +1 point</span>
+                    <div class="fl">
+                        <label for="color">Màu hoa:</label>
+                        <select class="hoa" name="Color">
+                            <option value="-1">Chọn màu</option>
+                            <option value="Yellow">Màu vàng</option>
+                            <option value="Red">Đỏ</option>
+                            <option value="White">Trắng</option>
+                            <option value="Black" selected>Đen</option>
+                        </select>
+                    </div>
+
+                    <div class="fl">
+                        <label for="quantity">Số lượng:</label>
+                        <input type="radio" name="optUnit" checked />Bó
+                        <input type="radio" name="optUnit" /> Cành
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Trang trí</legend>
+                    <div class="fl">
+                        <input type="checkbox" name="chkwrap" checked/> Gói giấy
+                        <input type="checkbox" name="chknote" /> Ghi lời chúc
+                    </div>
+                    <div class="fl">
+                        <textarea name="lstNote" cols="30" rows="4">Ghi lời chúc mừng</textarea>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Ngày giao:</legend>
+                    <div class="fl">
+                        <label for="Month">Tháng</label>
+                        <select name="Month" class="">
+                            <option value="1">Tháng 1</option>
+                            <option value="2">Tháng 2</option>
+                            <option value="3" selected>Tháng 3</option>
+                        </select>
+                    </div>
+                    
+                    <div class="sep">/</div> <div class="fl">
+                        <label for="Day">Ngày</label>
+                        <select id="Day" name="Day">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3" selected>30</option>
+                        </select>
+                    </div>
+
+                    <div class="sep">/</div>
+
+                    <div class="fl">
+                        <label for="Year">Năm</label>
+                        <select class="date" name="Year">
+                            <option value="2021">2021</option>
+                            <option value="2022" selected>2022</option>
+                            <option value="2023">2023</option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <fieldset id="Price">
+                    <legend>Thành tiền: (VNĐ)</legend>
+                    <label for="tinh tien">1,000,000 vnđ</label>
+                    
+                    <div id="submit">
+                        <input type="button" value="Tính tiền" />
+                        <input type="submit" value="Bước kế tiếp" />
+                    </div>
+                </fieldset>
             </div>
         </div>
-    </div>
+    </form>
 </body>
 </html>
