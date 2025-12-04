@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        .note{
+            color: gray;
+        }
+        header{
+            text-align: center;
+        }
+        .timeline{
+            position: relative;
+            margin: 0 auto;
+            top: 100px;
+        }
+        .timeline-item{
+            display: grid;
+            grid-template-columns: 1fr 50px 1fr;
+            gap: 0px;
+
+            margin-bottom: 15px;
+        }
+        .timeline-marked{
+            height: 20px;
+            width: 20px;
+            margin: 0 auto;
+            border-radius: 100%;
+            background-color: black;
+        }
+        .timeline-line{
+            position: absolute;
+            height: 400px;
+            width: 3px;
+            background-color: black;
+            left: 50%;
+            top: -30%;
+            bottom: 0;
+            transform: translateX(-50%)
+        }
+        .timeline-time{
+            text-align: end;
+            margin-right: 20px;
+        }
+        button{
+            position: absolute;
+            background-color: black;
+            color: white;
+            border-radius: 10px;
+            padding: 10px 20px;
+            bottom: 15%;
+            left: 48%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Changlog</h1>
+        <p class="note">Here's everthing we have shipped in the past few days</p>
+    </header>
+    <main>
+        <div class="timeline">
+            <div class="timeline-line"></div>
+
+            <div class="timeline-item">
+                <div class="timeline-time">September 3, 2024</div>
+                <div class="timeline-marked"></div>
+                <div class="timeline-content">Announcing Porjects on Frontend Roadmap</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">August 28,2024</div>
+                <div class="timeline-marked"></div>
+                <div class="timeline-content">Build your learning habits with learning streaks</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">August 25, 2024</div>
+                <div class="timeline-marked"></div>
+                <div class="timeline-content">Git and GitHub Roadmap</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">August 22, 2024</div>
+                <div class="timeline-marked"></div>
+                <div class="timeline-content">Submit your project solution and get feedback</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">August 15, 2024</div>
+                <div class="timeline-marked"></div>
+                <div class="timeline-content">Backend prohect ideas</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">August 10, 2024</div>
+                <div class="timeline-marked"></div>
+                <div class="timeline-content">Redis roadmap</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">August 1, 2024</div>
+                <div class="timeline-marked"></div>
+                <div class="timeline-content">Changelog page to help you stay in the loop</div>
+            </div>
+        </div>
+        <button>Visit Complete Changelog</button>
+    </main>
+</body>
+</html>
