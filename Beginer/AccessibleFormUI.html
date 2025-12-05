@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        main{
+            display: flex;
+            width: 70vw;
+            justify-content: space-evenly;
+            gap: 10px;
+            margin:  20px;
+            border: 1px solid black;
+            border-radius: 20px;
+            padding: 20px;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        input{
+            padding: 10px 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+                        outline: none;
+
+        }
+        form > button{
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        section{
+            position: relative;
+
+        }
+        .list-required{
+            background-color: rgb(214, 214, 214);
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .header-list{
+            margin-top: 120px;
+            text-align: center;
+            font-size: larger;
+            font-weight: bold;
+        }
+        .process-detail{
+            position: absolute;
+            top: 0;
+            right: 20%;
+        }
+        input:focus {
+            border-color: #005fcc;
+            box-shadow: 0 0 0 3px rgba(0, 95, 204, 0.3);
+            /* outline: 2px solid #005fcc; */
+        }
+        .percent{
+            position: absolute;
+            top: 9%;
+            right: 40%;
+            font-size: large;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <form action="">
+            <label for="fullName">Full Name</label>
+            <input type="text" name="fullName" id="fullName" placeholder="What should we do">
+            <div class="error_fullname"></div>
+
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="nghialam1509@gmail.com">
+            <div class="error_email"></div>
+
+            <label for="password">Password</label>
+            <input aria-required="true" type="password" name="password" id="password" placeholder="xxxxxxx">
+            <div class="error_password"></div>
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input aria-required="true" type="password" name="confirmPassword" id="confirmPassword" placeholder="xxxxxxx">
+            <div class="error_confirmPassword"></div>
+            
+            <button type="submit">Update Profile</button>
+        </form>
+
+        <section>
+            <div class="process">
+                <div class="process-detail">
+                    <svg width="120" height="120" viewBox="0 0 120 120" style="transform: rotate(-90deg);">
+                        <circle
+                            cx="60" cy="60" r="50"
+                            stroke="#e0e0e0"
+                            stroke-width="10"
+                            fill="none"
+                        />
+                    
+                        <circle
+                            cx="60" cy="60" r="50"
+                            stroke="black"
+                            stroke-width="10"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-dasharray="314"
+                            stroke-dashoffset="110"
+                        />
+                    </svg>
+                </div>
+                <p class="percent">65%</p>
+            </div>
+            <p class="header-list">Profile Completeness</p>
+            <div class="list-required">
+                <p><del>Create Account</del></p>
+                <p><del>Upload Roadmap Progress</del></p>
+                <p><del>Setup Public Profile</del></p>
+                <p>Complete your first project</p>
+                <p>Invite Your Friends</p>
+            </div>
+        </section>
+    </main>
+
+    
+
+</div>
+</body>
+</html>
