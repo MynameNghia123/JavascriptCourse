@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            padding: 20px;
+        }
+        main{
+            width: 300px;
+        }
+        svg{
+            display: flex;
+        }
+        .input-date{
+            width: 200px;
+            display: flex;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .input-date input{
+            width: 100%;
+            padding: 10px 20px 10px 5px;
+        }
+        .input-date button{
+            background-color: white;
+            border: none;
+            position: absolute;
+            transform: translateY(-50%);
+            top: 50%;
+            right: 2px; 
+       }
+       table, td{
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+            text-align: center;
+       }
+       .date-detail{
+            width: 100%;
+       }
+       table{
+            border-top: none;
+            width: 100%;
+       }
+       thead td{
+            border: none;
+       }
+       .nav-date{
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid black;
+        padding: 10px 20px;
+        align-items: center;
+       }
+       .nav-date__left{
+        text-align: center;
+        width: 10px;
+        height: 10px;
+        border-left: 3px solid black;
+        border-bottom: 3px solid black;
+        transform: rotateZ(45deg);
+       }
+        .nav-date__right{
+        text-align: center;
+        width: 10px;
+        height: 10px;
+        border-left: 3px solid black;
+        border-bottom: 3px solid black;
+        transform: rotateZ(-135deg);
+       }
+       td:hover{
+        background-color: azure;
+       }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="input-date">
+            <input type="text" placeholder="dd/mm/yyyy">
+            <button>
+                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4H5C3.89543 4 3 4.89543 3 6Z" stroke="#000000" stroke-width="2"/>
+                    <path d="M3 10H21" stroke="#000000" stroke-width="2"/>
+                    <path d="M9 10V22" stroke="#000000" stroke-width="2"/>
+                    <path d="M15 10V22" stroke="#000000" stroke-width="2"/>
+                    <path d="M3 16H21" stroke="#000000" stroke-width="2"/>
+                    <path d="M7 2V4" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M17 2V4" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+        <div class="date-detail">
+            <div class="nav-date">
+                <span class="nav-date__left"></span>
+                <span>December 2022</span>
+                <span class="nav-date__right"></span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>S</td>
+                        <td>M</td>
+                        <td>T</td>
+                        <td>W</td>
+                        <td>T</td>
+                        <td>F</td>
+                        <td>S</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>12</td>
+                        <td>13</td>
+                        <td>14</td>
+                        <td>15</td>
+                        <td>16</td>
+                        <td>17</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>19</td>
+                        <td>20</td>
+                        <td>21</td>
+                        <td>22</td>
+                        <td>23</td>
+                        <td>24</td>
+                    </tr>
+                    <tr>
+                        <td>25</td>
+                        <td>26</td>
+                        <td>27</td>
+                        <td>28</td>
+                        <td>29</td>
+                        <td>30</td>
+                        <td>31</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
