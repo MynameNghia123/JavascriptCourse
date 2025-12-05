@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            margin: 0px;
+            padding: 0px 0px 5px 0px;
+        }
+
+        .icon{
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 100%;
+        }
+        .form1{
+            display: flex;
+            flex-direction: column;
+            /* padding: 10px; */
+        }
+        .form1>.comment{
+            width: 250px;
+            background-color: black;
+            padding: 20px 25px;
+            color: white;
+            border-radius: 20px;
+            position: relative;
+
+        }
+        .infor{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .form1>.comment::after{
+            content: "";
+            background-color: black;
+            width: 20px;
+            height: 20px;
+            transform: translateX(-50%, -50%);
+            transform: rotateZ(45deg);
+            position: absolute;
+            top: 0;
+            
+            left: 5%;
+            top: 90%;
+        }
+        .form2{
+            border-radius: 10px;
+            border: 2px solid black;
+            padding: 10px 20px;
+            width: 250px;
+        }
+        .form2>.comment{
+            width: 250px;
+        }
+        .ngang{
+            display: flex;
+            gap: 20px;
+        }
+        .form3{
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .form3>img{
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            object-fit: cover;
+        }
+        .form3>.comment{
+            background-color: black;
+            color: white;
+            padding: 10px;border-radius: 20px;
+            width: 300px;
+        }
+        .star{
+            font-size: 30px; /* Kích thước sao */
+            color: #FFC107;  /* Màu vàng cam giống hình */
+            display: inline-block;       
+            margin-right: 0px;
+            padding: 0px; 
+        }
+        .form4{
+            width: 500px;
+            text-align: center;
+            margin-top: 10px;
+            border: 1px solid;
+            border-radius: 10px;
+            padding: 10px 20px;
+        }
+        .present{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .blur{
+            opacity: 0.5;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="ngang">
+            <article class="form1">
+                <div class="comment">
+                    I have been solving all the project ideas on roadmap.sh and I am surprised how far I have come from where i started.
+                    <br>
+                    <br>
+                    Highly recommended
+                </div>
+                <div class="infor">
+                    <img class="icon" src="../img/hinh1.jpg" alt="hinh 1">
+                    <span>
+                        <p style="font-size: 19px; font-weight: bold;">Artem Jones</p>
+                        <p>Junior Frontend Developer</p>
+                    </span>
+                </div>
+            </article>
+            <article class="form2">
+                <div class="comment">
+                    Since starting my career in 2021, I have only followed one resource, roadmap.sh, it truly helped me go from 0 to having a job and changing the financial trajectory of my family.
+                    <br>
+                    Highly recommended
+                </div>
+                <div class="infor">
+                    <img class="icon" src="../img/hinh2.jpg" alt="hinh 1">
+                    <span>
+                        <p style="font-size: 19px; font-weight: bold;">Artem Jones</p>
+                        <p>Junior Frontend Developer</p>
+                    </span>
+                </div>
+            </article>
+        </div>
+        <article class="form3">
+            <img src="../img/hinhf3.jpg" alt="">
+            <div class="comment">
+                <div class="star">
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                </div>
+                <p style="font-size: large; font-weight: bold;">Jackie Mackle</p>                
+                <br>
+                <p style="font-size: small; font-weight: lighter;">Engineering Manager</p>
+                <br>
+                <p>I find myself recommending roadmap.sh to all the internees or junior developers. It's a great way to skill up and grow in your career</p>
+            </div>
+        </article>
+         <article class="form4">
+            <p>roadmap.sh is incredible resource. I was fortunate to discover it</p>
+            <p>during my university day in 2018. Back then, it was just a simgle</p>
+            <p>repository with three images. Its amazing to see how much impact it  </p>
+            <p>has had on milions of lives since then</p>
+            <div class="present">
+                <p style="font-weight: bolder; font-size: 30px;">&lt</p>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img class="icon blur" src="../img/hinh1.jpg" alt="">
+                    <img class="icon" src="../img/hinh2.jpg" alt="">
+                    <img class="icon blur" src="../img/hinhf3.jpg" alt="">
+                </div>
+                <p style="font-weight: bolder; font-size: 30px;">&gt</p>
+            </div>
+        </article>
+
+    </main>
+</body>
+</html>
