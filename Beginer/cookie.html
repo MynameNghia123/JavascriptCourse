@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .cookie{
+            width: 200px;
+            width: 150px;
+            border-radius: 20px;
+            background-color: black;
+            color: white;
+
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 20px;
+            margin-bottom: 10px;
+            margin-right: 20px;
+        }
+        .icon{
+            width: 50px;
+            height: auto;
+        }
+        button{
+            background-color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-top: 10px;
+            color: black;
+            font-size: medium;
+        }
+        nav{
+            display: flex;
+            justify-content: space-between;
+        }
+        .pop{
+            display: inline;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            border-radius: 100%;
+        }
+        .pop:hover{
+            background-color: bisque;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="cookie">
+        <nav>
+            <img class="icon" src="../img/cookie.jpeg" alt="">
+            <div class="pop">X</div>
+        </nav>
+        <div>We use cookie to improve your user experience</div>
+        <button>I like Cookies</button>
+    </div>
+    <script>
+        document.querySelector(".pop").addEventListener("click" , (e)=>{
+            document.querySelector(".cookie").style.display = "none";
+        })
+    </script>
+</body>
+</html>
