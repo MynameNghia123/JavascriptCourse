@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập Responsive Cơ Bản</title>
+    <style>
+        /* 1. Reset cơ bản */
+        * {
+            box-sizing: border-box; /* Quan trọng: để padding không làm vỡ layout */
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 2. Style chung cho các khối để dễ nhìn màu */
+        header, footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* 3. Layout cho Desktop (Màn hình to) */
+        .container {
+            display: flex;       /* Dùng Flexbox để dàn hàng ngang */
+            flex-wrap: wrap;     /* Cho phép xuống dòng nếu cần */
+            min-height: 80vh;    /* Chiều cao tối thiểu cho đẹp */
+        }
+
+        .main-content {
+            background-color: #f1f1f1;
+            flex: 3;             /* Chiếm 3 phần (75%) */
+            padding: 20px;
+        }
+
+        .sidebar {
+            background-color: #ddd;
+            flex: 1;             /* Chiếm 1 phần (25%) */
+            padding: 20px;
+        }
+
+        /* 4. PHẦN QUAN TRỌNG NHẤT: RESPONSIVE */
+        /* Khi màn hình nhỏ hơn 768px (Điện thoại/Tablet dọc) */
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Đổi hướng từ Ngang sang Dọc */
+            }
+            
+            /* Lúc này Sidebar và Content sẽ tự động full 100% chiều rộng */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>HEADER (Logo & Menu)</h1>
+    </header>
+
+    <div class="container">
+        <main class="main-content">
+            <h2>Nội dung chính (Main Content)</h2>
+            <p>Trên máy tính, phần này to và nằm bên trái.</p>
+            <p>Trên điện thoại, phần này sẽ tự động tràn ra full màn hình.</p>
+            <p>Lorem ipsum dolor sit amet...</p>
+        </main>
+
+        <aside class="sidebar">
+            <h3>Sidebar</h3>
+            <p>Quảng cáo hoặc Menu phụ.</p>
+        </aside>
+    </div>
+
+    <footer>
+        <p>FOOTER (Bản quyền)</p>
+    </footer>
+
+</body>
+</html>

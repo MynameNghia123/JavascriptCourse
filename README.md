@@ -13,6 +13,8 @@ https://roadmap.sh/projects/image-grid
 
 https://roadmap.sh/projects/cookie-consent
 
+https://roadmap.sh/projects/accordion
+
 https://roadmap.sh/projects/tooltip-ui
 
 https://roadmap.sh/projects/simple-tabs

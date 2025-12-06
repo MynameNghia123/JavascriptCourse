@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        article{
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            gap: 10px;
+        }
+        .infor{
+            width: 80%;
+        }
+        .title{
+            width: 100%;
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+        .title>div{
+            position: absolute;
+            transform: translateY(-50%);
+            top: 50%;
+            right: 3%;
+            transition: transform 0.3s ease;
+        }
+        .title.active > div {
+            transform: translateY(-50%) rotate(180deg);
+        }
+        .explain{
+            padding: 10px 20px;
+            border: 1px solid black;
+            border-radius: 10px;
+            margin: 10px 0px;
+            overflow: hidden;
+            
+            max-height: 200px; /* Đặt chiều cao đủ lớn chứa nội dung */
+            opacity: 1;
+            padding: 10px 20px;
+            
+            /* Thời gian chạy animation */
+            transition: all 0.5s ease-in-out;
+        }
+        .hidden {
+            
+            max-height: 0;
+            opacity: 0;
+            padding: 0 20px; /* Giữ padding trái phải, đưa trên dưới về 0 */
+            border: 0px solid black; /* Ẩn viền */
+            margin: 0; /* Ẩn margin */
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Frequently Asked Questions</h1>
+        <p>Here are some of the frequently asked questions</p>
+        <article>
+                <div class="infor">
+                    <button class="title">What is roadmap.sh?
+                        <div>V</div>
+                    </button>
+                    <div class="explain hidden">roadmap.sh is a community effort
+                        to create learning paths, guides, project ideas and other similar
+                        content to help developers grow in their careers
+                    </div>
+                </div>
+                <div class="infor">
+                    <button class="title">What are the plans for roadmap.sh?
+                        <div>V</div>
+                    </button>
+                    <div class="explain hidden">roadmap.sh is a community effort
+                        to create learning paths, guides, project ideas and other similar
+                        content to help developers grow in their careers
+                    </div>
+                </div>
+                <div class="infor">
+                    <button class="title">How is roadmap.sh built
+                        <div>V</div>
+                    </button>
+                    <div class="explain hidden">roadmap.sh is a community effort
+                        to create learning paths, guides, project ideas and other similar
+                        content to help developers grow in their careers
+                    </div>
+                </div>
+                <div class="infor">
+                    <button class="title">Can I use roadmap.sh in my team?
+                        <div>V</div>
+                    </button>
+                    <div class="explain hidden">roadmap.sh is a community effort
+                        to create learning paths, guides, project ideas and other similar
+                        content to help developers grow in their careers
+                    </div>
+                </div>
+                <div class="infor">
+                    <button class="title">How can I create custom roadmaps
+                        <div>V</div>
+                    </button>
+                    <div class="explain hidden">roadmap.sh is a community effort
+                        to create learning paths, guides, project ideas and other similar
+                        content to help developers grow in their careers
+                    </div>
+                </div>
+                <div class="infor">
+                    <button class="title">Is roadmap.sh really 7th most starred project on Github
+                        <div>V</div>
+                    </button>
+                    <div class="explain hidden">roadmap.sh is a community effort
+                        to create learning paths, guides, project ideas and other similar
+                        content to help developers grow in their careers
+                    </div>
+                </div>
+        </article>
+
+    </main>
+</body>
+<script>
+    titles = document.querySelectorAll(".title");
+    console.log(titles)
+    titles.forEach((element) => {
+        element.addEventListener("click", (e) => {
+            console.log(e.target.nextElementSibling)
+            
+            titles.forEach((ele)=>{
+             ele.nextElementSibling.classList.add("hidden");
+            })
+            
+           e.target.nextElementSibling.classList.remove("hidden");
+           e.target.nextElementSibling.classList.add("active");
+        })
+    });
+</script>
+</html>
