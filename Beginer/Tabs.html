@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .display{
+            width: 30%;
+            padding: 10px 20px;
+            height: 100px;
+            background-color: black;
+            color: white;
+            border-radius: 10px;
+        }
+        li{
+            list-style: none;
+            padding: 10px 20px;
+            background-color: antiquewhite;
+            border-radius: 10px;
+        }
+        li:hover{
+            background-color: brown;
+        }
+        ul{
+            display: flex;
+            gap: 20px;
+        }
+        .active{
+            width: 100%;
+            margin-top: 10px;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li class="first-tab">First Tab
+                <div class=""></div>
+            </li>
+            <li class="second-tab">Second Tab
+                <div class=""></div>
+            </li>
+            <li class="third-tab">Third Tab
+                <div class=""></div>
+            </li>
+            <li class="fourth-tab">Fourth Tab
+                <div class=""></div>
+            </li>
+        </ul>
+    </nav>
+    <div class="display">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates illum sed esse illo beatae cupiditate nisi hic perferendis, minima dolorem magni corporis maxime delectus sequi.
+    </div>
+</body>
+<script>
+    const firstTab = document.querySelector(".first-tab");
+    const secondTab = document.querySelector(".second-tab");
+    const thirdTab = document.querySelector(".third-tab");
+    const fourthTab = document.querySelector(".fourth-tab");
+    const display = document.querySelector(".display")
+    const contains = [
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates illum ",
+        " và thời gian sẽ sẽ giúp em đi qua đừng cơn ",
+        " Ai khóc nỗi đau này  ",
+        " Son tùng MTP cllalla  "
+        ]
+        const ul = document.querySelector("ul");
+    ul.addEventListener("click", (e)=>{
+        if (e.target === ul){
+            return;
+        }
+        document.querySelectorAll("li div").forEach((div)=>{
+            div.classList.value = "";
+        })
+        if (e.target === firstTab){
+            display.textContent = contains[0];
+            firstTab.querySelector("div").classList.add("active");
+        }else if (e.target === secondTab){
+            display.textContent = contains[1];
+            secondTab.querySelector("div").classList.add("active");
+
+        }else if (e.target === thirdTab){
+            display.textContent = contains[2];
+            thirdTab.querySelector("div").classList.add("active");
+
+        }else {
+            display.textContent = contains[3];
+            fourthTab.querySelector("div").classList.add("active");
+
+        }
+    })
+</script>
+</html>
