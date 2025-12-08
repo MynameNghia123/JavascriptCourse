@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Project</title>
+    <link rel="icon" href="./learning-zone website-templates master reveal-img/apple-touch-icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        *{
+            font-size: 14px;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .green{
+            color: aquamarine;
+
+        }
+        .black{
+            color: rgb(117, 117, 117);
+        }
+        .contact{
+            display: flex;
+            justify-content: space-between;
+            padding: 1% 10%;
+        }
+        .contact--left{
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        .contact-right{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        .bar{
+            height: 20px;
+            width: 2px;
+            background-color: gray;
+        }
+        .hori-bar{
+            width: 100%;
+            height: .5px;
+            background-color: rgb(218, 218, 218);
+        }
+        .header{
+            display: flex;
+            height: 50px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 10%;
+            background-color: white;
+        }
+        .header-left{
+            font-size: 3rem;
+            color: #0C2E8A;
+        }
+        .header-left span{
+            font-size: 3rem;
+            color: #50D8AF;
+        }
+        .header-right{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .header-right a{
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bolder;
+        }
+        .header-right a:hover{
+            color: #50D8AF;
+            transition: .75s ease;
+        }
+        a{
+            font-style: none;
+            text-decoration: none;
+        }
+        .scroll{
+            position: fixed;
+            width: 100%;
+            height: 80px;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .poster{
+            position: relative;
+            top: 0;
+            right: 0;
+            margin-top: 25px;
+            width: 100%;
+        }
+        .poster img{
+
+            width: 100%;
+            height: 65vh;
+            object-fit: cover;
+            opacity: 0.5;
+        }
+        .on-poster{
+            position: absolute;
+            width: 80%;
+            transform: translateX(-50%) translateY(-50%); 
+            top: 50%;
+            left: 50%;
+            text-align: center;
+        }
+        .on-poster h1,.on-poster span{
+            font-size: 5rem;
+            color: #0C2E8A;
+        }
+        .on-poster span{
+            color: #50D8AF;
+            text-decoration: underline;
+        }
+        .on-poster .poster-start{
+            font-size: 1.5rem;
+            color: white;
+            background-color: #0C2E8A;
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            margin-right: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .on-poster .poster-start:hover{
+            border: 1px solid #0C2E8A;
+            background-color: white;
+            color: #0C2E8A;
+            transition: 0.3s ease;
+        }
+        .on-poster .poster-project{
+            font-size: 1.5rem;
+            color: white;
+            background-color: #50D8AF;
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            margin-right: 10px;
+            cursor: pointer;
+                        margin-top: 20px;
+
+        }
+        .on-poster .poster-project:hover{
+            border: 1px solid #50D8AF;
+            background-color: white;
+            color: #50D8AF;
+            transition: 0.3s ease;
+        }
+        .infor-1{
+            display: flex;
+            justify-content: space-evenly;
+            padding: 10px 10%;
+            margin-top: 100px;
+        }
+        .infor-1 img{
+            height: 400px;
+            width: 500px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .infor-detail{
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 45%;
+
+        }
+        .infor-detail h2{
+            font-size: 2.5rem;
+            color: #0C2E8A;
+        }
+        .infor-detail i{
+            color: gray;
+            font-size: 1rem;
+        }
+        .infor-detail div{
+            font-size: 1rem;
+        }
+        .service{
+            padding: 10px 10%;
+            display: flex;
+            flex-direction: column;
+        }
+        .sectionHeader{
+            font-size: 2.5rem;
+            color: #0C2E8A;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .horiz-bar{
+            width: 35px;
+            height: 3px;
+            background-color: #50D8AF;
+            margin-bottom: 10px;
+        }
+        .container{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            row-gap: 20px;
+            column-gap: 20px;
+        }
+        .container .item{
+            display: flex;
+            gap: 30px;
+            padding: 20px 40px;
+            width: 100%;
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .item i{
+            width: 100px;
+            height: 100px;
+            font-size: 5rem;
+            text-align: center;
+
+        }
+        .item>.item-infor>h2{
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .icon-gradient {
+            background: linear-gradient(45deg, #50d8af 0%, #a3ebd5 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            
+            font-size: 2rem; 
+            margin-bottom: 15px; /* Tạo khoảng cách với tiêu đề bên dưới */
+        }
+        .clients{
+            padding: 10px 10%;
+
+        }
+        .list-brand{
+
+            margin-top: 10px;
+            align-items: center;
+            height: 80px;
+            align-items: center;
+
+            /* border: 1px solid black; */
+            overflow: hidden;
+            position: relative;
+        }
+        @keyframes scrollleft{
+            to{
+                left: -200px;
+            }
+        }
+        .list-brand .item{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 100%;
+            width: 200px;
+            animation-name: scrollleft;
+            animation-duration: 30s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        .track{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .item1 {
+            animation-delay: calc(30s / 8 * (8 - 1) * -1);
+        }
+        .item2 {
+            animation-delay: calc(30s / 8 * (8 - 2) * -1);
+        }
+        .item3 {
+            animation-delay: calc(30s / 8 * (8 - 3) * -1);
+        }
+        .item4 {
+            animation-delay: calc(30s / 8 * (8 - 4) * -1);
+        }
+        .item5 {
+            animation-delay: calc(30s / 8 * (8 - 5) * -1);
+        }
+        .item6 {
+            animation-delay: calc(30s / 8 * (8 - 6) * -1);
+        }
+        .item7 {
+            animation-delay: calc(30s / 8 * (8 - 7) * -1);
+        }
+        .item8 {
+            animation-delay: calc(30s / 8 * (8 - 8) * -1); /* = 0s */
+        }
+        .clients p{
+            margin-top: 10px;
+        }
+        .our-portfolio{
+            padding: 10px 10%;
+
+        }
+        .portfolio-container{
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr); /* Viết tắt cho 1fr 1fr 1fr 1fr */
+            /* grid-template-rows: 1fr 1fr;      */
+                        overflow: hidden;
+
+        }
+        .portfolio-item{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+
+        }
+        .portfolio-item img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .2s ease;
+
+        }
+        .portfolio-item>h1{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 2rem;
+            color: white;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: 10;
+
+            overflow: hidden;
+
+        }
+        .portfolio-item>img:hover{
+            scale: 1.2;
+            z-index: 0;
+            filter: brightness(40%);
+
+        }
+        .our-portfolio p{
+            margin-bottom: 10px;
+        }
+        .testimonials{
+            padding: 10px 10%;
+
+        }
+        .testimonials-container{
+            display: flex;
+            justify-content: flex-start;
+            overflow: hidden;
+
+            gap: 30px;
+            margin-top: 50px;
+            cursor: grab;
+        }
+        .testimonials-container.active{
+            cursor: grabbing;
+
+        }
+        .testimonials-container .item{
+            padding: 20px 20px;
+
+            flex: 0 0 275px;
+            text-align: center;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); 
+       }
+
+        .testimonials-container .item .represent{
+            margin-top: 20px;
+
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 100%;
+        }
+        .quote-text{
+            display: inline-block;
+            position: relative;
+            width: 100%;
+        }
+        .quote-icon-left, .quote-icon-right{
+            display: inline-block;
+
+            width: 25px;
+            height: 25px;
+        }
+        .quote-icon-right{
+
+            vertical-align: top;
+        }
+        .call-to-action{
+            background-color: #0C2E8A;
+            color: white;
+            padding: 10px 10%;
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+        .call-to-action h1{
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .call-to-action p{
+            font-size: 1.25rem;
+        }
+        .call-to-action button{
+            background-color: #0C2E8A;
+            border: 2px solid white;
+            color: white;
+            width: 200px;
+            height: 50px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="contact">
+            <div class="contact--left">
+                <i class="fa-regular fa-envelope green"></i>
+                <a>Contact@example.com</a>
+                <div class="bar"></div>
+                <i class="fa-solid fa-phone green"></i>
+                <a>+1 5589 55488 55</a>
+            </div>
+            <div class="contact-right">
+                <a href="#" class="twitter"><i class="fa-brands fa-twitter black"></i></a>
+                                <div class="bar"></div>
+
+                <a href="#" class="facebook"><i class="fa-brands fa-facebook-f black"></i></a>
+                                <div class="bar"></div>
+
+                <a href="#" class="instagram"><i class="fa-solid fa-camera black"></i></a>
+                                <div class="bar"></div>
+
+                <a href="#" class="google-plus"><i class="fa-brands fa-google-plus-g black"></i></a>
+                                <div class="bar"></div>
+
+                <a href="#" class="linkedin"><i class="fa-brands fa-linkedin-in black"></i></a>
+            </div>
+        </nav>
+        <div class="hori-bar"></div>
+        <nav class="header">
+            <h1 class="header-left">Reve<span>al</span> </h1>
+
+            <nav class="header-right ">
+                <a href="">Home</a>
+                <a href="">About Us</a>
+                <a href="">Services</a>
+                <a href="">Portfolio</a>
+                <a href="">Team</a>
+                <a href="">Dropdown <span style="font-weight: lighter;">v</span></a>
+                <a href="">Contact</a>
+            </nav>
+            <nav class="header-right-2">
+                <button><img src="" alt="">::::::</button>
+            </nav>
+        </nav>
+    </header>
+    <main>
+        <section class="poster">
+            <img src="./learning-zone website-templates master reveal-img/intro-carousel/2.jpg" alt="">
+            <div class="on-poster">
+                <h1>Making <span>your ideas</span></h1>
+                <h1>happen</h1>
+                <button class="poster-start">Get Started</button>
+                <button class="poster-project">Our Projects</button>
+            </div>
+        </section>
+
+        <section class="infor-1">
+            <img src="./learning-zone website-templates master reveal-img/about-img.jpg" alt="">
+            <div class="infor-detail">
+                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, quae.</h2>
+
+                <i>Lorem i Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id quos illo laboriosam ad, deleniti cupiditate nisi beatae inventore veritatis! sicing elit. Ad, fugit!</i>
+                
+                <div>
+                    <i class="fa-regular fa-circle-check" style="color: aquamarine;"></i>
+                    <p style="display: inline;">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
+                </div>
+                <div>
+                    <i class="fa-regular fa-circle-check" style="color: aquamarine;"></i>
+                    <p style="display: inline;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos!</p>
+                </div>
+                <div>
+                    <i class="fa-regular fa-circle-check" style="color: aquamarine;"></i>
+                    <p style="display: inline;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium enim ipsam optio quam ut sequi consequatur temporibus ex quas qui! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam, pariatur.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="service">
+            <h1 class="sectionHeader">SERVICES</h1>
+            <div class="horiz-bar"></div>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea earum iste non quo, quae quidem dicta rem eum sunt possimus corporis ipsam optio id aliquam reiciendis. Deserunt iste officia aspernatur.
+            </p>
+            <div class="container">
+                <div class="item">
+                    <i class="fa-solid fa-briefcase icon-gradient"></i>
+                    <div class="item-infor">
+                        <h2>Lorem ipsum</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime id dicta autem quasi sint unde sit, natus quibusdam veritatis ex.
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <i class="fa-solid fa-chart-simple icon-gradient" >
+                    </i>
+                    <div class="item-infor">
+                        <h2>Lorem ipsum</h2>
+                        <p>
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum praesentium nulla at consequatur natus ipsa necessitatibus porro similique, nam beatae veritatis obcaecati animi voluptatum suscipit! Enim odio ex consequuntur dolorum?
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <i class="fa-solid fa-map icon-gradient"></i>
+                    <div class="item-infor">
+                        <h2>Lorem ipsum</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et aliquam ullam corporis provident cupiditate, ab eligendi natus ratione velit suscipit omnis sunt quia sint asperiores.
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <i class="fa-regular fa-image icon-gradient"></i>
+                    <div class="item-infor">
+                        <h2>Lorem ipsum</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex recusandae illum aspernatur, aperiam minima vel soluta laborum sit sed saepe iusto.
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <section class="clients">
+            <h2 class="sectionHeader">CLIENTS</h2>
+            <div class="horiz-bar"></div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat similique non ab in labore voluptatum ipsam consectetur assumenda, eaque fugit! lorem</p>
+            <div class="list-brand">
+                <div class="track">
+                    <img  class="item item1" src="./learning-zone website-templates master reveal-img/clients/client-1.png" alt="">
+                    <img class="item item2" src="./learning-zone website-templates master reveal-img/clients/client-3.png" alt="">
+                    <img class="item item3" src="./learning-zone website-templates master reveal-img/clients/client-2.png" alt="">
+                    <img class="item item4" src="./learning-zone website-templates master reveal-img/clients/client-4.png" alt="">
+                    <img class="item item5" src="./learning-zone website-templates master reveal-img/clients/client-5.png" alt="">
+                    <img class="item item6" src="./learning-zone website-templates master reveal-img/clients/client-6.png" alt="">
+                    <img class="item item7" src="./learning-zone website-templates master reveal-img/clients/client-7.png" alt="">
+                    <img class="item item8" src="./learning-zone website-templates master reveal-img/clients/client-8.png" alt="">
+                                </div>
+                </div>
+        </section>
+
+        <section class="our-portfolio">
+            <h2 class="sectionHeader">OUR PORTFOLIO</h2>
+            <div class="horiz-bar"></div>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum dicta corporis pariatur placeat minima autem vel doloribus! Tenetur eum perferendis voluptas est sit, quaerat quam!</p>
+        
+        </section>
+        
+        <div class="portfolio-container">
+            <div class="portfolio-item">
+                <h1>Portfolio 1</h1>
+                <img src="./learning-zone website-templates master reveal-img/portfolio/1.jpg" alt="">
+            </div>
+            <div class="portfolio-item">
+                <h1>Portfolio 2</h1>
+                <img src="./learning-zone website-templates master reveal-img/portfolio/2.jpg" alt="">
+            </div>
+            <div class="portfolio-item">
+                <h1>Portfolio 3</h1>
+                <img src="./learning-zone website-templates master reveal-img/portfolio/3.jpg" alt="">
+            </div>
+            <div class="portfolio-item">
+                <h1>Portfolio 4</h1>
+                <img src="./learning-zone website-templates master reveal-img/portfolio/4.jpg" alt="">
+            </div>
+            <div class="portfolio-item">
+                <h1>Portfolio 5</h1>
+                <img src="./learning-zone website-templates master reveal-img/portfolio/5.jpg" alt="">
+            </div>
+            <div class="portfolio-item">
+                <h1>Portfolio 6</h1>
+                <img src="./learning-zone website-templates master reveal-img/portfolio/6.jpg" alt="">
+            </div>
+            <div class="portfolio-item">
+                <h1>Portfolio 7</h1>
+                <img src="./learning-zone website-templates master reveal-img/portfolio/7.jpg" alt="">
+            </div>
+            <div class="portfolio-item">
+                <h1>Portfolio 8</h1>
+                <img src="./learning-zone website-templates master reveal-img/portfolio/8.jpg" alt="">
+            </div>
+        </div>
+
+        <section class="testimonials">
+            <h2 class="sectionHeader">TESTIMONIALS</h2>
+            <div class="horiz-bar"></div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia itaque suscipit, deleniti asperiores culpa laudantium fugit accusamus quo. Voluptatibus asperiores impedit corrupti unde nulla magnam quos nam eum, eligendi commodi!</p>
+            <div class="testimonials-container">
+                <div class="item">
+
+                        
+                        <p class="quote-text">
+
+                            <img class="quote-icon-left" src="./learning-zone website-templates master reveal-img/quote-sign-left.png" alt="">
+           
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe eum impedit sapiente cumque corrupti reprehenderit placeat amet eos minus dolores?
+                            <img class="quote-icon-right" src="./learning-zone website-templates master reveal-img/quote-sign-right.png" alt="">
+                       
+                        </p>
+
+                        <img class="represent" src="./learning-zone website-templates master reveal-img/testimonial-1.jpg" alt="">
+                        <h2>John Larson</h2>
+                        <p>Entrepreneur</p>
+                  
+                </div>
+                <div class="item">
+                    
+                        <p class="quote-text">
+
+                            <img class="quote-icon-left" src="./learning-zone website-templates master reveal-img/quote-sign-left.png" alt="">
+           
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe eum impedit sapiente cumque corrupti reprehenderit placeat amet eos minus dolores?
+                            <img class="quote-icon-right" src="./learning-zone website-templates master reveal-img/quote-sign-right.png" alt="">
+                       
+                        </p>
+
+                        <img class="represent" src="./learning-zone website-templates master reveal-img/testimonial-2.jpg" alt="">
+                        <h2>Saudi goomd</h2>
+                        <p>Entrepreneur</p>
+                    
+                </div>
+                <div class="item">
+                    
+                        <p class="quote-text">
+
+                            <img class="quote-icon-left" src="./learning-zone website-templates master reveal-img/quote-sign-left.png" alt="">
+           
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe eum impedit sapiente cumque corrupti reprehenderit placeat amet eos minus dolores?
+                            <img class="quote-icon-right" src="./learning-zone website-templates master reveal-img/quote-sign-right.png" alt="">
+                       
+                        </p>
+
+                        <img class="represent" src="./learning-zone website-templates master reveal-img/testimonial-3.jpg" alt="">
+                        <h2>Good morening</h2>
+                        <p>Entrepreneur</p>
+                </div>
+                <div class="item">
+                    
+                         <p class="quote-text">
+
+                            <img class="quote-icon-left" src="./learning-zone website-templates master reveal-img/quote-sign-left.png" alt="">
+           
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe eum impedit sapiente cumque corrupti reprehenderit placeat amet eos minus dolores?
+                            <img class="quote-icon-right" src="./learning-zone website-templates master reveal-img/quote-sign-right.png" alt="">
+                       
+                        </p>
+
+                        <img class="represent" src="./learning-zone website-templates master reveal-img/testimonial-4.jpg" alt="">
+                        <h2>heha Larson</h2>
+                        <p>Entrepreneur</p>
+                    <
+                </div>
+                <div class="item">
+                    
+                        <p class="quote-text">
+
+                            <img class="quote-icon-left" src="./learning-zone website-templates master reveal-img/quote-sign-left.png" alt="">
+           
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe eum impedit sapiente cumque corrupti reprehenderit placeat amet eos minus dolores?
+                            <img class="quote-icon-right" src="./learning-zone website-templates master reveal-img/quote-sign-right.png" alt="">
+                       
+                        </p>
+
+                        <img class="represent" src="./learning-zone website-templates master reveal-img/testimonial-5.jpg" alt="">
+                        <h2>John lali</h2>
+                        <p>Entrepreneur</p>
+                    
+                </div>
+            </div>
+        </section>
+
+        
+
+    </main>
+    <footer>
+
+        <section class="call-to-action">
+            <div>
+                <h1>Call to action</h1>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis voluptatem harum, quibusdam reiciendis ad neque tempora repellendus. Ratione, commodi laudantium? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae, sint!</p>
+            </div>
+            <button>Call To Action</button>
+        </section>
+    </footer>
+</body>
+<script>
+    const header = document.querySelector(".header");
+    window.addEventListener("scroll", ()=>{
+        console.log("Bạn đang ở vị trí: " + window.scrollY);
+        if (window.scrollY > 100) {
+            if (!header.classList.contains("scroll")) {
+                header.classList.add("scroll");
+            }
+        } else {
+            if (header.classList.contains("scroll")) {
+                header.classList.remove("scroll");
+            }
+        }
+    })
+
+
+    const slider = document.querySelector('.testimonials-container');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+
+    const items = Array.from(slider.children);
+
+    items.forEach(item => {
+        const clone = item.cloneNode(true);
+        slider.appendChild(clone);
+    });
+
+    // 2. XỬ LÝ KÉO THẢ (DRAG)
+
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('active');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+
+
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2; // Tốc độ kéo (nhân 2 cho nhanh)
+        slider.scrollLeft = scrollLeft - walk;
+    });
+
+    // 3. XỬ LÝ VÒNG LẶP VÔ TẬN (TELEPORT LOGIC)
+
+    const gap = 30; 
+    // Tổng chiều rộng 1 bộ = (Chiều rộng 1 item + gap) * số lượng item gốc
+    const singleSetWidth = (items[0].offsetWidth + gap) * items.length;
+
+    slider.addEventListener('scroll', () => {
+        // Nếu cuộn quá giới hạn của bộ 1 (tức là đã sang bộ clone)
+        if (slider.scrollLeft >= singleSetWidth) {
+            // Dịch chuyển tức thời về vị trí tương ứng ở bộ 1 (trừ đi độ dài 1 bộ)
+            slider.scrollLeft -= singleSetWidth;
+        } 
+        // Nếu cuộn ngược về quá đầu (về 0)
+        else if (slider.scrollLeft <= 0) {
+            // Dịch chuyển tức thời đến cuối bộ 1 (cộng thêm độ dài 1 bộ)
+            slider.scrollLeft += singleSetWidth;
+        }
+    });
+</script>
+</html>
