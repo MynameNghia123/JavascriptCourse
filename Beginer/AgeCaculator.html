@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Age Caculator</h1>
+    <label for="">Enter your birth</label>
+    <input id="date" type="date">
+    <button id="caculate">Calculate</button>
+    <div id="display"></div>
+    <script>
+        
+        document.getElementById("caculate").addEventListener("click", (e) => {
+            const birthDate = new Date(document.getElementById("date").value);
+            const now = new Date();
+
+            if (!document.getElementById("date").value || birthDate > now) {
+                alert("Vui lòng chọn ngày sinh hợp lệ!");
+                return;
+            }
+
+            let years = now.getFullYear() - birthDate.getFullYear();
+
+            let months = now.getMonth() - birthDate.getMonth();
+
+            let days = now.getDate() - birthDate.getDate();
+
+            if (days < 0) {
+                months--;
+            }
+
+
+            if (months < 0) {
+                years--;      
+                months += 12; 
+            }
+
+            console.log(`Tuổi: ${years}, Tháng dư: ${months}`);
+            document.getElementById("display").textContent = `You are ${years} years and ${months} months old`;
+        });
+
+    </script>
+</body>
+</html>
