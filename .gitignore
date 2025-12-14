@@ -1,0 +1,21 @@
+# 1. Bỏ qua thư mục chứa thư viện (Rất quan trọng)
+node_modules/
+
+# 2. Bỏ qua tất cả các file .json theo yêu cầu
+*.json
+
+# 3. NGOẠI LỆ (QUAN TRỌNG):
+# Dấu chấm than (!) nghĩa là "KHÔNG bỏ qua" (Giữ lại).
+# Bạn bắt buộc phải giữ lại các file cấu hình này để chạy dự án:
+!package.json
+!package-lock.json
+
+# Nếu bạn dùng VS Code, nên giữ lại file cấu hình này (nếu có)
+!jsconfig.json
+
+# 4. Các file hệ thống & môi trường (Nên có)
+.DS_Store
+Thumbs.db
+.env
+dist/
+build/

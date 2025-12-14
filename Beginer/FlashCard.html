@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/output.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="font-bold text-2xl">Flash Card</h1>
+    <div class="relative min-w-96 w-1/3 h-10 rounded-xl border-2 border-black pl-15 p-5 pr-10
+    ">
+        <p id="total" class="absolute top-2 right-1 inline text-center">5 of 20</p>
+        <div id="layer-behind" class=" absolute top-1 left-0
+         rounded-xl  pl-4 h-9/10 bg-gray-300 border-white
+          border-4">
+            <p id="percent-complete" class="absolute top-0 -right-3">25%</p>
+        </div>
+    </div>
+
+    <div class="w-1/3 min-w-96 h-10/12 outline-1 rounded-xl">
+        <div class="mt-3 w-full min-h-80 h-4/5 flex justify-center
+         items-center  rounded-xl border-4
+         border-white  bg-gray-300">
+            <p id="display" class="w-2/2 h-2/3 p-10 font-bold text-2xl text-center">What is different between var, asdaaaaaaa jd dj sa djasnbdbdjasbasb dhdbsajs s dd d d  let and const</p>
+            
+        </div>
+        <nav class="w-full h-1/5 flex justify-between rounded-xl bg-gray-300 pl-2 pr-2">
+            <button id="previous-ques" class="hover:bg-amber-200 cursor-pointer rounded-xl p-2"> &lt; Previous </button>
+            <button id="show-answer" class="hover:bg-amber-200 cursor-pointer rounded-xl p-2">Show Answer</button>
+            <button id="next-ques" class="hover:bg-amber-200 cursor-pointer rounded-xl p-2"> Next &gt; </button>
+        </nav>
+    </div>
+</body>
+<script>
+const questions = [
+    "Tôi có thể gán lại (reassign) giá trị mới cho một biến const không?",
+    "Tôi có thể khai báo biến const trước rồi gán giá trị sau ở dòng khác được không?",
+    "Nếu biến const là một Object hoặc Array, tôi có thể thay đổi nội dung bên trong nó không?",
+    "Phạm vi hoạt động (Scope) của biến const là gì?",
+    "Khi nào nên đặt tên biến const bằng chữ IN HOA (UPPERCASE)?"
+];
+
+const answers = [
+    "Không. Biến const không thể được gán lại giá trị mới sau khi đã khởi tạo. Sẽ gây lỗi TypeError.",
+    "Không. Bạn bắt buộc phải khởi tạo giá trị (gán dấu =) ngay tại dòng khai báo.",
+    "Có. Const chỉ chặn việc gán lại tên biến, không chặn việc sửa đổi thuộc tính của Object hoặc phần tử của Array.",
+    "Block Scope (Phạm vi khối). Nó chỉ tồn tại và truy cập được trong cặp ngoặc nhọn { ... } chứa nó.",
+    "Dùng IN HOA cho các hằng số 'cứng' được biết trước khi chạy (ví dụ: PI, API_URL, COLOR_RED). Còn biến const thông thường thì dùng camelCase."
+];
+let indexQuestionAndAnswer = 1;
+
+const btnPre = document.getElementById("previous-ques");
+const btnNxt = document.getElementById("next-ques");
+const btnShow = document.getElementById("show-answer");
+const display = document.getElementById("display");
+const percentComplete = document.getElementById("percent-complete");
+const totalQuestion = document.getElementById("total");
+const layer = document.getElementById("layer-behind");
+
+initApp();
+function initApp(){
+
+    setPercent();
+    setTotalQuestion();
+    setDisplay();
+}
+function setDisplay(){
+       
+    display.textContent = questions[indexQuestionAndAnswer - 1];
+}
+function setTotalQuestion(){
+    totalQuestion.textContent = `${indexQuestionAndAnswer} of ${questions.length}`;
+}
+function setPercent(){
+
+    percentComplete.textContent =  (100*indexQuestionAndAnswer)/questions.length  + "%";
+    const percentage = (indexQuestionAndAnswer / questions.length) * 100;    
+    layer.style.width = `${percentage - 15}%`;
+}
+
+btnNxt.addEventListener("click", ()=>{
+    indexQuestionAndAnswer++;
+    if(indexQuestionAndAnswer > questions.length || indexQuestionAndAnswer < 1){
+
+        indexQuestionAndAnswer--; 
+        return;
+    } 
+    initApp()
+})
+btnPre.addEventListener("click", ()=>{
+    indexQuestionAndAnswer--;
+    if(indexQuestionAndAnswer > questions.length || indexQuestionAndAnswer < 1) {
+        indexQuestionAndAnswer++; 
+        return;
+    }
+    initApp()
+})
+btnShow.addEventListener("click", ()=>{
+    display.textContent = answers[indexQuestionAndAnswer];
+})
+</script>
+</html>
