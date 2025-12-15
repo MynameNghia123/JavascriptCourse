@@ -3,14 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Document</title>
+    <style>
+        .hehe{
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Temperature Converter</h2>
+    <h1>Temperature Converted</h1>
     <p>Enter the temperature, select units and submit</p>
-    <div class="contains-btn">
-        <button class="number-temperature"></button>
-        <button class="number-temperature"></button>
+    <div class="hehe">
+        <input id="unit" type="text" placeholder="0.00">
+        <select name="unit" id="fromUnit">
+            <option value="none" disabled selected>From Unit</option>
+            <option value="F">Fahrenheit</option>
+            <option value="C">Celseus</option>
+            <option value="K">Kelvin</option>
+        </select>
+        <select name="unit" id="toUnit">
+            <option value="none" disabled selected>To Unit</option>
+            <option value="F">Fahrenheit</option>
+            <option value="C">Celseus</option>
+            <option value="K">Kelvin</option>
+        </select>
     </div>
+    <button id="submit">Convert</button>
+</div>
+<div id="result">
 </body>
+<script>
+    const submit = document.getElementById("submit");
+    const result = document.getElementById("result");
+    const fromUnit = document.getElementById("fromUnit");
+    const toUnit = document.getElementById("toUnit");
+    const unitBtn = document.getElementById("unit");
+
+    submit.addEventListener("click", (e)=>{
+        const unit = unitBtn.value;
+        if (isNaN(unit)){
+            alert("input phải là số")
+            unitBtn.focus();
+            unitBtn.value = "";
+            return;
+        }
+        if (unit < 0){
+            alert("input phải là số lớn hơn ko")
+            unitBtn.focus();
+            unitBtn.value = "";
+            return;
+        }
+    
+        const from = fromUnit.value;
+        const to = toUnit.value;
+        console.log("from: " + from + "- to: "+ to)
+        if (from === "none" || to === "none"){
+            alert("Ko được để trống From and To");
+            return;
+        }
+
+        if (from === "F"){
+            if (to === "F"){
+                result.textContent = unit + " Fahrenheit is" + unit + " Fahrenheit";
+            }else if (to === "C"){
+                result.textContent = unit + " Fahrenheit is" + ((unit - 32)/1.8) + " Celseus";
+            }else if (to === "K"){
+                result.textContent = unit + " Fahrenheit is" + ((unit - 32)/1.8 + 273.15) + " Kelvin";
+            }
+        }else if (from === "C"){
+            if (to === "F"){
+                result.textContent = unit + " Celseus is" + ((unit * 1.8) + 32) + " Fahrenheit";
+            }else if (to === "C"){
+                result.textContent = unit + " Celseus is" + (unit) + " Celseus";
+            }else if (to === "K"){
+                result.textContent = unit + " Celseus is" + (unit + 273.15) + " Kelvin";
+            }
+        }else if (from === "K"){
+            if (to === "F"){
+                result.textContent = unit + " Kelvin is" + (unit + 273.15) + " Kelvin";
+            }else if (to === "C"){
+                result.textContent = unit + " Kelvin is" + (unit - 273.15) + " Celsius";
+            }else if (to === "K"){
+                result.textContent = unit + " Kelvin is" + (((unit - 273.15)*1.8) +32) + " Fahrenheit";
+            }
+        }
+    })
+</script>
 </html>
